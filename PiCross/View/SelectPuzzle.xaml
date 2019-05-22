@@ -1,0 +1,49 @@
+﻿<Page x:Class="View.SelectPuzzle"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SelectPuzzle">
+    <Page.Resources>
+        <local:PuzzleSizeConverter x:Key="puzzleSizeConverter"/>
+        <Style x:Key="puzzleSelectedStyle" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <Binding Path="Selected.Value">
+                        <Binding.Converter>
+                            <local:PuzzleSelectedConverter Selected="LightBlue" Not="Transparent"/>
+                        </Binding.Converter>
+                    </Binding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <ItemsControl Name="puzzles">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3" >
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="15" Style="{StaticResource puzzleSelectedStyle}">
+                        <Grid.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding Select}"></MouseBinding>
+                        </Grid.InputBindings>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Puzzle.Puzzle.Grid.Size,Converter={StaticResource puzzleSizeConverter}}"></TextBlock>
+                        <TextBlock Grid.Row="1" Text="{Binding Puzzle.Author}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Page>
