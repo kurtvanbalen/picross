@@ -47,7 +47,8 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Button Width="100" Name="SelectButton" Click="SelectButton_Click">Select game</Button>
         <TextBlock Name="SelectErrorBlock" Text="Error! Please select a puzzle before clicking the button!" TextAlignment="Center" Visibility="Hidden" Foreground="Red"/>
+        <Button Width="100" Name="SelectButton" Click="SelectButton_Click">Select game</Button>
+        <Button Name="BackButton" Click="BackButton_Click" Width="100">Back to menu</Button> 
     </StackPanel>
 </Page>

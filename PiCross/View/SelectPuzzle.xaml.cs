@@ -46,6 +46,11 @@ namespace View
             }
             SelectErrorBlock.Visibility = Visibility.Visible;
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage(this.Main));
+        }
     }
     public class PuzzleSelectedConverter : IValueConverter
     {
