@@ -14,36 +14,40 @@
                 <Setter.Value>
                     <Binding Path="Selected.Value">
                         <Binding.Converter>
-                            <local:PuzzleSelectedConverter Selected="LightBlue" Not="Transparent"/>
+                            <local:PuzzleSelectedConverter Selected="Green" Not="Red"/>
                         </Binding.Converter>
                     </Binding>
                 </Setter.Value>
             </Setter>
         </Style>
     </Page.Resources>
-    <Grid>
-        <ItemsControl Name="puzzles">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" >
-                    </UniformGrid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="15" Style="{StaticResource puzzleSelectedStyle}">
-                        <Grid.InputBindings>
-                            <MouseBinding Gesture="LeftClick" Command="{Binding Select}"></MouseBinding>
-                        </Grid.InputBindings>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="5*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding Puzzle.Puzzle.Grid.Size,Converter={StaticResource puzzleSizeConverter}}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="{Binding Puzzle.Author}"></TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    <StackPanel>
+        <Grid>
+            <ItemsControl Name="puzzles">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" >
+                        </UniformGrid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="15" Style="{StaticResource puzzleSelectedStyle}">
+                            <Grid.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding Select}"></MouseBinding>
+                            </Grid.InputBindings>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Puzzle.Puzzle.Grid.Size,Converter={StaticResource puzzleSizeConverter}}"></TextBlock>
+                            <TextBlock Grid.Row="1" Text="{Binding Puzzle.Author}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Button Width="100" Name="SelectButton" Click="SelectButton_Click">Select game</Button>
+        <TextBlock Name="SelectErrorBlock" Text="Error! Please select a puzzle before clicking the button!" TextAlignment="Center" Visibility="Hidden" Foreground="Red"/>
+    </StackPanel>
 </Page>

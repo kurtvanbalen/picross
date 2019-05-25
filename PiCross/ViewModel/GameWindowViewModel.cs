@@ -13,15 +13,16 @@ namespace ViewModel
     {
         public GameWindowViewModel( )
         {
-           var puzzle = Puzzle.FromRowStrings(
-                "xxxxx",
-                "x...x",
-                "x...x",
-                "x...x",
-                "xxxxx"
+           var puzzle = Puzzle.FromRowStrings(
+                "xxxxx",
+                "x...x",
+                "x...x",
+                "x...x",
+                "xxxxx"
            );
             var facade = new PiCrossFacade();
             PlayablePuzzle = facade.CreatePlayablePuzzle(puzzle);
+            SquareGrid = Grid.Create<SquareViewModel>(PlayablePuzzle.Grid.Size, p => new SquareViewModel(PlayablePuzzle.Grid[p]));
         }
         public IPlayablePuzzle PlayablePuzzle { get; set; }
         public IGrid<SquareViewModel> SquareGrid { get; set; }
@@ -29,8 +30,8 @@ namespace ViewModel
 
         public void StartGame(IPuzzleLibraryEntry puzzle)
         {
-            PlayablePuzzle = new PiCrossFacade().CreatePlayablePuzzle(puzzle.Puzzle);
-            SquareGrid = Grid.Create<SquareViewModel>(PlayablePuzzle.Grid.Size, p => new SquareViewModel(PlayablePuzzle.Grid[p]));
+            this.PlayablePuzzle = new PiCrossFacade().CreatePlayablePuzzle(puzzle.Puzzle);
+            this.SquareGrid = Grid.Create<SquareViewModel>(PlayablePuzzle.Grid.Size, p => new SquareViewModel(PlayablePuzzle.Grid[p]));
         }
     }
     public class SquareViewModel

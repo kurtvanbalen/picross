@@ -14,7 +14,6 @@ namespace ViewModel
         {
             Game = new GameWindowViewModel();
             SelectedPuzzle = new SelectPuzzleViewModel();
-
         }
         public GameWindowViewModel Game { get; }
         public SelectPuzzleViewModel SelectedPuzzle { get; }

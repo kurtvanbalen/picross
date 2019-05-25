@@ -47,8 +47,8 @@
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="550"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <controls:PiCrossControl x:Name="picrossControl" Grid.Column="0">
             <controls:PiCrossControl.SquareTemplate>

@@ -26,8 +26,10 @@ namespace View
     {
         DispatcherTimer timer = new DispatcherTimer();
         TimeSpan time = new TimeSpan(0);
+
         public GamePage(MainWindowViewModel main)
         {
+            //init
             InitializeComponent();
             Main = main;
 
@@ -37,11 +39,12 @@ namespace View
             timer.Tick += new EventHandler(timer_Tick);
 
             //gamedata
-            GameWindowVM = new GameWindowViewModel();
-            picrossControl.Grid = GameWindowVM.SquareGrid;
-            picrossControl.RowConstraints = GameWindowVM.PlayablePuzzle.RowConstraints;
-            picrossControl.ColumnConstraints = GameWindowVM.PlayablePuzzle.ColumnConstraints;
+            picrossControl.Grid = Main.Game.SquareGrid;
+            picrossControl.RowConstraints = Main.Game.PlayablePuzzle.RowConstraints;
+            picrossControl.ColumnConstraints = Main.Game.PlayablePuzzle.ColumnConstraints;
         }
+
+        public MainWindowViewModel Main { get; }
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -49,12 +52,9 @@ namespace View
             Timer.Content = time;
         }
 
-        public GameWindowViewModel GameWindowVM { get; }
-        public MainWindowViewModel Main { get; }
-
         private void SolvedButton_Click(object sender, RoutedEventArgs e)
         {
-            if (GameWindowVM.PlayablePuzzle.IsSolved.Value == true)
+            if (Main.Game.PlayablePuzzle.IsSolved.Value == true)
             {
                 timer.Stop();
                 Window GameWonWindow = new GameWon(time);
@@ -70,9 +70,10 @@ namespace View
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            this.NavigationService.Navigate(new MainPage(Main));
+            this.NavigationService.Navigate(new MainPage(new MainWindowViewModel()));
         }
     }
+
     public class SquareConverter : IValueConverter
     {
         public object Filled { get; set; }
@@ -103,6 +104,7 @@ namespace View
             throw new NotImplementedException();
         }
     }
+
     public class ConstraintColorConverter : IValueConverter
     {
         public object Satisfied { get; set; }

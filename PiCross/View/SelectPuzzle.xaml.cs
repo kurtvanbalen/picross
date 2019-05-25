@@ -1,4 +1,5 @@
 ﻿
+using Cells;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -29,14 +30,21 @@ namespace View
             InitializeComponent();
             Main = main;
             this.DataContext = this;
-            SelectPuzzleVM = Main.SelectedPuzzle;
-            puzzles.ItemsSource = SelectPuzzleVM.Puzzles;
+            puzzles.ItemsSource = Main.SelectedPuzzle.Puzzles;
         }
         public MainWindowViewModel Main { get; }
-        public SelectPuzzleViewModel SelectPuzzleVM {get;}
         public void SelectGame(object sender, EventArgs e)
         {
             Main.Game.StartGame(Main.SelectedPuzzle.Chosen.Value.Puzzle);
+        }
+
+        private void SelectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Main.SelectedPuzzle.Chosen.Value.Selected.Value != false) { 
+                this.SelectGame(sender, e);
+                NavigationService.Navigate(new GamePage(this.Main));
+            }
+            SelectErrorBlock.Visibility = Visibility.Visible;
         }
     }
     public class PuzzleSelectedConverter : IValueConverter
@@ -46,7 +54,7 @@ namespace View
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var Selected = (bool)value;
-            if (Selected) return Selected;
+            if (Selected) { return Selected; }
             return Not;
         }
 
