@@ -12,68 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
-using ViewModel;
 
 namespace View
 {
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
-    public partial class GamePage : Page
+    public partial class GameWindow : Window
     {
-        DispatcherTimer timer = new DispatcherTimer();
-        TimeSpan time = new TimeSpan(0);
-
-        public GamePage(MainWindowViewModel main)
+        public GameWindow()
         {
-            //init
             InitializeComponent();
-            Main = main;
-
-            //timer
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
-            timer.Tick += new EventHandler(timer_Tick);
-
-            //gamedata
-            picrossControl.Grid = Main.Game.SquareGrid;
-            picrossControl.RowConstraints = Main.Game.PlayablePuzzle.RowConstraints;
-            picrossControl.ColumnConstraints = Main.Game.PlayablePuzzle.ColumnConstraints;
-        }
-
-        public MainWindowViewModel Main { get; }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            time = time.Add(new TimeSpan(0, 0, 1));
-            Timer.Content = time;
-        }
-
-        private void SolvedButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Main.Game.PlayablePuzzle.IsSolved.Value == true)
-            {
-                timer.Stop();
-                Window GameWonWindow = new GameWon(time);
-                GameWonWindow.Show();
-                this.NavigationService.Navigate(new MainPage(Main));
-            }
-            else
-            {
-                FailGame.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
-            this.NavigationService.Navigate(new MainPage(new MainWindowViewModel()));
         }
     }
-
     public class SquareConverter : IValueConverter
     {
         public object Filled { get; set; }
@@ -111,13 +63,27 @@ namespace View
         public object Wrong { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {       
+        {
             var satisfied = (bool)value;
             if (satisfied)
             {
                 return Satisfied;
             }
             return Wrong;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class TimeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var ms = (double)value / 1000;
+            return string.Format("{0:N1}s", ms);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

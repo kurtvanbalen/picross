@@ -19,16 +19,9 @@ namespace View
     /// </summary>
     public partial class GameWon : Window
     {
-        public GameWon(TimeSpan time)
+        public GameWon()
         {
             InitializeComponent();
-
-            SpentTime.Text = "It took you " + time + " to complete the puzzle!";
-        }
-
-        private void CloseGame_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

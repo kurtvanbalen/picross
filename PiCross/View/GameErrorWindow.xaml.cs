@@ -1,8 +1,5 @@
-﻿using DataStructures;
-using PiCross;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel;
-using Grid = DataStructures.Grid;
-using Size = DataStructures.Size;
+
 namespace View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GameErrorWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameErrorWindow : Window
     {
-        public MainWindow()
+        public GameErrorWindow()
         {
             InitializeComponent();
         }

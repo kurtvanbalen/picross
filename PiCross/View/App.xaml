@@ -1,9 +1,33 @@
 ﻿<Application x:Class="View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:View"
-             StartupUri="MainWindow.xaml">
+             xmlns:views="clr-namespace:View"
+             xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+             >
     <Application.Resources>
-         
+        
+        <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
+            <views:MainWindow />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:RulesViewModel}">
+            <views:RulesWindow />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:SelectPuzzleViewModel}">
+            <views:SelectPuzzleWindow />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:GameWindowViewModel}">
+            <views:GameWindow />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:GameWonViewModel}">
+            <views:GameWon />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:GameErrorViewModel}">
+            <views:GameErrorWindow/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
