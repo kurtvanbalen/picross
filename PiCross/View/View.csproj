@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Click.wav" />
+    <Content Include="Media\winner.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

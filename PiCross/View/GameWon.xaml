@@ -16,6 +16,9 @@
                     <EventTrigger RoutedEvent="PreviewMouseDown">
                         <SoundPlayerAction Source="Media/Click.wav" />
                     </EventTrigger>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <SoundPlayerAction Source="Media/winner.wav" />
+                    </EventTrigger>
                 </Style.Triggers>
             </Style>
         </Grid.Style>
